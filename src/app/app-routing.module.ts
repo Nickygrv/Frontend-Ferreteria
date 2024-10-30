@@ -7,6 +7,9 @@ import { ContactosComponent } from './pages/contactos/contactos.component';
 import { NuevoProductoComponent } from './pages/nuevo-producto/nuevo-producto.component';
 import { ActualizarProductoComponent } from './pages/actualizar-producto/actualizar-producto.component';
 import { LoginComponent } from './pages/login/login.component';
+import { PerfilUsuarioComponent } from './pages/perfil-usuario/perfil-usuario.component';
+import { RegistrarUsuarioComponent } from './pages/registrar-usuario/registrar-usuario.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -16,7 +19,9 @@ const routes: Routes = [
   { path: 'contactos', component: ContactosComponent },
   { path: 'nuevo-producto', component: NuevoProductoComponent },
   { path: 'actualizar-producto/:id', component: ActualizarProductoComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'perfil', component: PerfilUsuarioComponent },
+  { path: 'registrar-usuario', component: RegistrarUsuarioComponent }
 ];
 
 @NgModule({

@@ -1,0 +1,39 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1 style="text-align: center;">REGISTRAR USUARIO</h1>
+<form class="form" (ngSubmit)="submitForm()">
+  <mat-form-field class="input">
+    <mat-label>Nombre del usuario</mat-label>
+    <input matInput placeholder="Ingrese su nombre" [(ngModel)]="usuario.nombre" name="nombre" required>
+  </mat-form-field>
+  <br>
+
+  <mat-form-field class="input">
+    <mat-label>Correo Electrónico</mat-label>
+    <input matInput type="email" placeholder="Ingrese su correo" [(ngModel)]="usuario.correo" name="correo" required>
+  </mat-form-field>
+  <br>
+
+  <mat-form-field class="input">
+    <mat-label>Dirección</mat-label>
+    <input matInput placeholder="Ingrese su dirección" [(ngModel)]="usuario.direccion" name="direccion" required>
+  </mat-form-field>
+  <br>
+
+  <mat-form-field class="input">
+    <mat-label>Teléfono</mat-label>
+    <input matInput type="tel" placeholder="Ingrese su teléfono" [(ngModel)]="usuario.telefono" name="telefono" required>
+  </mat-form-field>
+  <br>
+
+  <mat-form-field class="input">
+    <mat-label>Contraseña</mat-label>
+    <input matInput type="password" placeholder="Ingrese su contraseña" [(ngModel)]="usuario.contrasena" name="contrasena" required>
+  </mat-form-field>
+  <br>
+
+  <button mat-raised-button color="primary" type="submit">Registrar Usuario</button>
+</form>

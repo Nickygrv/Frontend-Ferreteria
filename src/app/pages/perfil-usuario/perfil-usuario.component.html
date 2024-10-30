@@ -1,0 +1,30 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1 style="text-align: center;">PERFIL DE USUARIO</h1>
+<form class="form" (ngSubmit)="submitForm()">
+    <mat-form-field class="input">
+        <mat-label>Nombre</mat-label>
+        <input matInput name="nombre" [(ngModel)]="perfil.nombre">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="input">
+        <mat-label>Correo Electrónico</mat-label>
+        <input matInput type="email" name="correo_electronico" [(ngModel)]="perfil.correo_electronico">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="input">
+        <mat-label>Dirección</mat-label>
+        <input matInput name="direccion" [(ngModel)]="perfil.direccion">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="input">
+        <mat-label>Teléfono</mat-label>
+        <input matInput type="text" name="telefono" [(ngModel)]="perfil.telefono">
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary" type="submit">Actualizar perfil</button>
+</form>

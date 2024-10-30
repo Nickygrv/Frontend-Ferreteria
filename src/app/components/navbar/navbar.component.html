@@ -12,13 +12,17 @@
     <mat-icon class="material-icons-outlined" style="color: black;">account_circle</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/login">
-        <mat-icon>account_circle</mat-icon>
-        <span>Log In</span>
-    </button>
-    <button mat-menu-item (click)="logout()">
-        <mat-icon>exit_to_app</mat-icon>
-        <span >Cerrar sesión</span>
-    </button>
+        <button mat-menu-item routerLink="/login">
+            <mat-icon>account_circle</mat-icon>
+            <span>Log In</span>
+        </button>
+        <button mat-menu-item routerLink="/perfil" *ngIf="userRole === 'user' || userRole === 'admin'">
+            <mat-icon>account_circle</mat-icon>
+            <span>Mi Perfil</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span >Cerrar sesión</span>
+        </button>
     </mat-menu>
 </div>
