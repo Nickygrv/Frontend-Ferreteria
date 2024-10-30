@@ -1,0 +1,20 @@
+.contactos {
+    text-align: center;
+  }
+  
+  .redes-sociales {
+    margin-top: 20px;
+  }
+  
+  .redes-sociales a {
+    display: inline-block;
+    margin-right: 10px;
+    color: #333;
+    font-size: 24px;
+    transition: color 0.3s;
+  }
+  
+  .redes-sociales a:hover {
+    color: #007bff;
+  }
+  

@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Confirmar Borrado</h2>
+    <mat-dialog-content>
+      ¿Quieres borrar el item '{{ data.nombre }}' con el ID '{{ data.id }}'?
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close color="primary">Cancelar</button>
+      <button mat-button (click)="onYesClick()" color="warn">Borrar</button>
+    </mat-dialog-actions>
+    

@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.carousel {
+    position: relative;
+    width: 900px;
+    left: 50%;
+    top: 150%;
+    transform: translate(-50%, 0%);
+}
+
+.mat-mdc-card {
+    position: relative;
+    width: 280px;
+}
+
+.mat-mdc-text-field-wrapper {
+    width: 420px;
+}
+

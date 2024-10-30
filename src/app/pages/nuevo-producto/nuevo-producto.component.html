@@ -1,0 +1,42 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1 style="text-align: center;">NUEVO PRODUCTO</h1>
+<form class="form" (ngSubmit)="submitForm()">
+    <mat-form-field class="input">
+      <mat-label>Nombre</mat-label>
+      <input matInput placeholder="Nombre" [(ngModel)]="datos.nombre" name="nombre" required>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="input">
+      <mat-label>Imagen</mat-label>
+      <input matInput type="text" placeholder="Ingresa el link de la imagen para el producto" [(ngModel)]="datos.imagen" name="imagen" required>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="input">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput placeholder="Añade una descripción del producto" [(ngModel)]="datos.descripcion" name="descripcion"></textarea>
+    </mat-form-field>
+    <br>
+
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td>
+                <mat-form-field class="input2">
+                    <mat-label>Precio</mat-label>
+                    <input matInput type="number" placeholder="Precio" [(ngModel)]="datos.precio" name="precio" required>
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="input2">
+                    <mat-label>Cantidad en stock</mat-label>
+                    <input matInput type="number" placeholder="Cantidad inicial en stock" [(ngModel)]="datos.stock" name="stock" required>
+                </mat-form-field>
+            </td>
+        </tr>
+    </table>
+    <button mat-raised-button color="primary" type="submit">Agregar producto</button>
+</form>
+  

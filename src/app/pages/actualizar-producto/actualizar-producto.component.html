@@ -1,0 +1,42 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1 style="text-align: center;">ACTUALIZAR PRODUCTO</h1>
+<form class="form" (ngSubmit)="submitForm()">
+    <mat-form-field class="input">
+      <mat-label>Nombre</mat-label>
+      <input matInput name="nombre" [(ngModel)]="producto.nombre">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="input">
+      <mat-label>Imagen</mat-label>
+      <input matInput type="text" name="imagen" [(ngModel)]="producto.imagen">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="input">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput name="descripcion" [(ngModel)]="producto.descripcion"></textarea>
+    </mat-form-field>
+    <br>
+
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td>
+                <mat-form-field class="input2">
+                    <mat-label>Precio</mat-label>
+                    <input matInput type="number" name="precio" [(ngModel)]="producto.precio">
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="input2">
+                    <mat-label>Cantidad en stock</mat-label>
+                    <input matInput type="number" name="stock" [(ngModel)]="producto.stock">
+                </mat-form-field>
+            </td>
+        </tr>
+    </table>
+    <button mat-raised-button color="primary" type="submit">Actualizar producto</button>
+</form>

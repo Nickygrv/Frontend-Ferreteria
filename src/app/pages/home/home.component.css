@@ -1,0 +1,29 @@
+.example-card {
+    max-width: 400px;
+  }
+  
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+  }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .card-item {
+    flex-basis: 33%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .container {
+    width: 600px; /* Tamaño en píxeles */
+    height: 400px; /* Tamaño en píxeles */
+    margin: 0 auto; /* Margen automático en los ejes horizontal */
+    display: flex;
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+  }
+  
