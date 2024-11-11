@@ -1,24 +1,24 @@
 .form {
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  .mat-form-field {
-    width: 100%;
-  }
-  
-  button[type="submit"] {
-    margin-top: 16px;
-  }
-  
-  .input{
-    width: 450px;
-  }
-  
-  td {
-  padding-right: 8px;
-  }
-  
-  .input1 {
-  width: 100px;
-  }
+max-width: 400px;
+margin: 0 auto;
+}
+
+.mat-form-field {
+width: 100%;
+}
+
+button[type="submit"] {
+margin-top: 16px;
+}
+
+.input{
+width: 450px;
+}
+
+td {
+padding-right: 8px;
+}
+
+.input1 {
+width: 100px;
+}

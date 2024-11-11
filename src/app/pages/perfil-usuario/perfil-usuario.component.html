@@ -5,26 +5,48 @@
 <br>
 <br>
 <h1 style="text-align: center;">PERFIL DE USUARIO</h1>
-<form class="form" (ngSubmit)="submitForm()">
+<form class="form" (ngSubmit)="submitForm()" #perfilForm="ngForm">
     <mat-form-field class="input">
         <mat-label>Nombre</mat-label>
-        <input matInput name="nombre" [(ngModel)]="perfil.nombre">
+        <input matInput name="nombre" [(ngModel)]="perfil.nombre" required pattern="^[a-zA-ZÀ-ÿ\s]*$">
+        <mat-error *ngIf="perfilForm.controls['nombre']?.hasError('required') && perfilForm.controls['nombre']?.touched">
+            Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="perfilForm.controls['nombre']?.hasError('pattern') && perfilForm.controls['nombre']?.touched">
+            El nombre solo puede contener letras y espacios
+        </mat-error>
     </mat-form-field>
     <br>
+
     <mat-form-field class="input">
         <mat-label>Correo Electrónico</mat-label>
-        <input matInput type="email" name="correo_electronico" [(ngModel)]="perfil.correo_electronico">
+        <input matInput type="email" name="correo_electronico" [(ngModel)]="perfil.correo_electronico" required email>
+        <mat-error *ngIf="perfilForm.controls['correo_electronico']?.hasError('required') && perfilForm.controls['correo_electronico']?.touched">
+            Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="perfilForm.controls['correo_electronico']?.hasError('email') && perfilForm.controls['correo_electronico']?.touched">
+            Ingresa un correo electrónico válido (debe contener @)
+        </mat-error>
     </mat-form-field>
     <br>
+
     <mat-form-field class="input">
         <mat-label>Dirección</mat-label>
-        <input matInput name="direccion" [(ngModel)]="perfil.direccion">
+        <input matInput name="direccion" [(ngModel)]="perfil.direccion" required>
+        <mat-error *ngIf="perfilForm.controls['direccion']?.invalid && perfilForm.controls['direccion']?.touched">
+            Este campo es obligatorio
+        </mat-error>
     </mat-form-field>
     <br>
+
     <mat-form-field class="input">
         <mat-label>Teléfono</mat-label>
-        <input matInput type="text" name="telefono" [(ngModel)]="perfil.telefono">
+        <input matInput type="text" name="telefono" [(ngModel)]="perfil.telefono" required pattern="^[0-9]*$">
+        <mat-error *ngIf="perfilForm.controls['telefono']?.invalid && perfilForm.controls['telefono']?.touched">
+            Solo se permiten números
+        </mat-error>
     </mat-form-field>
     <br>
-    <button mat-raised-button color="primary" type="submit">Actualizar perfil</button>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="perfilForm.invalid">Actualizar perfil</button>
 </form>

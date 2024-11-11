@@ -1,59 +1,75 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-registrar-usuario',
   templateUrl: './registrar-usuario.component.html',
-  styleUrls: ['./registrar-usuario.component.css'],
+  styleUrls: ['./registrar-usuario.component.css']
 })
-export class RegistrarUsuarioComponent {
-  mensaje: string = ''; // Mensaje para mostrar al usuario
-  usuario = {
-    nombre: '',
-    correo: '',
-    direccion: '',
-    telefono: '',
-    contrasena: '',
-  };
+export class RegistrarUsuarioComponent implements OnInit {
+  registerForm!: FormGroup;
+  mensaje: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: HttpClient
+  ) {}
 
-  // Método para manejar el registro del usuario
-  submitForm() {
-    // Validar que todos los campos estén completos
-    if (this.usuario.nombre && this.usuario.correo && this.usuario.direccion && this.usuario.telefono && this.usuario.contrasena) {
-      this.mensaje = 'Usuario registrado con éxito'; // Mensaje de éxito
-      
-      // Aquí puedes descomentar el siguiente bloque para realizar la solicitud HTTP
-      /*
-      this.http.post('http://localhost:3000/api/usuarios', this.usuario).subscribe(
-        response => {
-          console.log('Registro exitoso', response);
-          this.mensaje = 'Usuario registrado con éxito';
-          this.limpiarFormulario();
-        },
-        error => {
-          console.error('Error al registrar el usuario', error);
-          this.mensaje = 'Ocurrió un error al registrar el usuario';
-        }
-      );
-      */
-
-      // Limpiar el formulario después del registro
-      this.limpiarFormulario();
-    } else {
-      this.mensaje = 'Por favor, complete todos los campos'; // Mensaje de error
-    }
+  ngOnInit(): void {
+    this.buildForm();
   }
 
-  // Método para limpiar el formulario
-  limpiarFormulario() {
-    this.usuario = {
-      nombre: '',
-      correo: '',
-      direccion: '',
-      telefono: '',
-      contrasena: '',
-    };
+  private buildForm(): void {
+    this.registerForm = this.formBuilder.group({
+      nombre: ['', [Validators.required]],
+      correo: ['', [Validators.required, Validators.email]],
+      direccion: ['', [Validators.required]],
+      telefono: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      usuario: ['', [Validators.required]],
+      contrasena: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
+
+  register(): void {
+    if (this.registerForm.valid) {
+      const formData = this.registerForm.value;
+      
+      // Paso 1: Registrar el usuario en la tabla `usuario`
+      this.http.post('http://localhost:3000/usuarios', {
+        usuario: formData.usuario,
+        contrasena: formData.contrasena
+      }).subscribe(
+        (response: any) => {
+          const usuarioId = response.usuarioId;
+
+          // Paso 2: Registrar el perfil en la tabla `perfil_usuario`
+          this.http.post('http://localhost:3000/perfil_usuario', {
+            usuarioId: usuarioId,
+            nombre: formData.nombre,
+            correo: formData.correo,
+            direccion: formData.direccion,
+            telefono: formData.telefono
+          }).subscribe(
+            () => {
+              this.mensaje = 'Usuario y perfil registrados con éxito';
+              alert(this.mensaje);
+              this.registerForm.reset();
+            },
+            (error) => {
+              console.error('Error al registrar el perfil:', error);
+              this.mensaje = 'Error al registrar el perfil';
+              alert(this.mensaje);
+            }
+          );
+        },
+        (error) => {
+          console.error('Error al registrar el usuario:', error);
+          this.mensaje = 'Error al registrar el usuario';
+        }
+      );
+    } else {
+      this.mensaje = 'Por favor, complete todos los campos correctamente';
+    }
   }
 }
