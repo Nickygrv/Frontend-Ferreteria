@@ -30,6 +30,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { PerfilUsuarioComponent } from './pages/perfil-usuario/perfil-usuario.component';
 import { RegistrarUsuarioComponent } from './pages/registrar-usuario/registrar-usuario.component';
+import { ListaUsuariosComponent } from './pages/lista-usuarios/lista-usuarios.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { RegistrarUsuarioComponent } from './pages/registrar-usuario/registrar-u
     LoginComponent,
     PedidosComponent,
     PerfilUsuarioComponent,
-    RegistrarUsuarioComponent
+    RegistrarUsuarioComponent,
+    ListaUsuariosComponent
   ],
   imports: [
     BrowserModule,
