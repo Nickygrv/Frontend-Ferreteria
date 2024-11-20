@@ -31,6 +31,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { PerfilUsuarioComponent } from './pages/perfil-usuario/perfil-usuario.component';
 import { RegistrarUsuarioComponent } from './pages/registrar-usuario/registrar-usuario.component';
 import { ListaUsuariosComponent } from './pages/lista-usuarios/lista-usuarios.component';
+import { ListaProductosComponent } from './pages/lista-productos/lista-productos.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ListaUsuariosComponent } from './pages/lista-usuarios/lista-usuarios.co
     PedidosComponent,
     PerfilUsuarioComponent,
     RegistrarUsuarioComponent,
-    ListaUsuariosComponent
+    ListaUsuariosComponent,
+    ListaProductosComponent,
   ],
   imports: [
     BrowserModule,

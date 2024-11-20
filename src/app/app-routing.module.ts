@@ -10,6 +10,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { PerfilUsuarioComponent } from './pages/perfil-usuario/perfil-usuario.component';
 import { RegistrarUsuarioComponent } from './pages/registrar-usuario/registrar-usuario.component';
 import { ListaUsuariosComponent } from './pages/lista-usuarios/lista-usuarios.component';
+import {ListaProductosComponent} from "./pages/lista-productos/lista-productos.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'perfil', component: PerfilUsuarioComponent },
   { path: 'registrar-usuario', component: RegistrarUsuarioComponent },
-  { path: 'lista-usuarios', component: ListaUsuariosComponent }
+  { path: 'lista-usuarios', component: ListaUsuariosComponent },
+  { path: 'lista-productos', component: ListaProductosComponent}
 ];
 
 @NgModule({
