@@ -1,0 +1,11 @@
+<div *ngIf="usuario">
+    <h1>Detalles del Usuario</h1>
+    <p><strong>ID:</strong> {{ usuario.id }}</p>
+    <p><strong>Usuario:</strong> {{ usuario.usuario }}</p>
+    <p><strong>Rol:</strong> {{ usuario.role }}</p>
+    <!-- Puedes agregar más detalles según lo que devuelva el backend -->
+  </div>
+  
+  <!-- Puedes agregar un botón para regresar a la lista de usuarios -->
+  <button mat-button (click)="regresar()">Volver a la lista</button>
+  

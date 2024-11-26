@@ -1,20 +1,122 @@
+/* Estilo general para la tabla */
 table {
     width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
+.mat-elevation-z8 {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil para darle un aspecto de elevación */
+}
+
+/* Estilos para las celdas de la tabla */
+th.mat-header-cell, td.mat-cell {
+    text-align: center;
+    padding: 16px;
+}
+
+th.mat-header-cell {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #3f3f3f;
+}
+
+/* Filtro de búsqueda */
 .mat-mdc-form-field {
     font-size: 14px;
     width: 100%;
+    margin-bottom: 16px;
 }
 
+/* Estilo para la caja de entrada del filtro */
+input.mat-input-element {
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/* Estilo para la fila cuando no hay datos */
+.mat-row.mat-no-data-row {
+    text-align: center;
+    font-size: 16px;
+    color: #888;
+}
+
+/* Contenedor principal */
+.container {
+    margin: 0 auto;
+    max-width: 1100px; /* Limita el tamaño para mejor diseño */
+    padding: 20px;
+}
+
+/* Contenedor de la búsqueda */
+.mat-form-field {
+    width: 100%;
+}
+
+/* Botón flotante (si lo tienes implementado) */
 .example-button-container {
     position: fixed;
-    bottom: 490px; /* Opcional: ajusta la distancia desde la parte inferior */
-    right: 32px; /* Ajusta la distancia desde el borde derecho */
+    bottom: 20px;  /* Ajusta la distancia desde la parte inferior */
+    right: 20px;   /* Ajusta la distancia desde el borde derecho */
+    z-index: 1000;
 }
 
+/* Imagen de perfil u otros elementos de imagen */
 img, svg {
     vertical-align: middle;
-    height: 250px;
-    width: 250px;
+    height: 50px; /* Redimensionado a un tamaño más manejable */
+    width: 50px;
+}
+
+/* Estilo para las celdas cuando están vacías */
+td.mat-cell.empty {
+    background-color: #f9f9f9;
+    font-style: italic;
+}
+
+/* Filtro de búsqueda - estilos específicos */
+input.mat-input-element {
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+/* Estilo de los botones en la tabla si decides incluir botones de acción */
+button.mat-button {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+button.mat-button:hover {
+    background-color: #45a049; /* Color ligeramente más oscuro al pasar el mouse */
+}
+
+/* Estilos de la tabla cuando no hay datos */
+tr.mat-row.mat-no-data-row td {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+}
+
+/* Mejoras visuales en el contenedor de la tabla */
+.mat-table {
+    background-color: #fff; /* Fondo blanco para las filas de la tabla */
+    border-radius: 8px;
+}
+
+/* Estilo de los encabezados de columna */
+th.mat-header-cell {
+    background-color: #e8f5e9; /* Un tono suave de verde */
+    color: #2e7d32; /* Un verde oscuro */
+}
+
+/* Estilo general de las celdas */
+td.mat-cell {
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
 }

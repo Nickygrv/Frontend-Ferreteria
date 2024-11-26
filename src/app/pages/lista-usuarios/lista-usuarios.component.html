@@ -1,42 +1,66 @@
-<br>
-<br>
-<br>
-<br>
-<h1 style="text-align: center;">LISTA DE USUARIOS</h1>
-<br>
-<div class="container">
-<mat-form-field>
-    <mat-label>Búsqueda</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ingresa el Id, usuario o rol para la búsqueda" #input>
-</mat-form-field>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuarios</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="lista-usuarios.component.css"> <!-- Asegúrate de incluir el CSS aquí -->
+</head>
+<body>
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <br>
+    <br>
+    <h1 class="page-title">LISTA DE USUARIOS</h1>
+    <br>
 
-    <!-- ID Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
+    <div class="container">
+        <!-- Campo de búsqueda -->
+        <mat-form-field class="search-field">
+            <mat-label>Búsqueda</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ingresa el Id, usuario o rol para la búsqueda" #input>
+        </mat-form-field>
 
-    <!-- Usuario Column -->
-    <ng-container matColumnDef="usuario">
-      <th mat-header-cell *matHeaderCellDef> usuario </th>
-      <td mat-cell *matCellDef="let element"> {{element.usuario}} </td>
-    </ng-container>
+        <!-- Tabla de usuarios -->
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <!-- Precio Column -->
-    <ng-container matColumnDef="role">
-      <th mat-header-cell *matHeaderCellDef> Rol </th>
-      <td mat-cell *matCellDef="let element"> {{element.role}} </td>
-    </ng-container>
+            <!-- Columna ID -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <!-- Columna Usuario -->
+            <ng-container matColumnDef="usuario">
+                <th mat-header-cell *matHeaderCellDef> Usuario </th>
+                <td mat-cell *matCellDef="let element"> {{element.usuario}} </td>
+            </ng-container>
 
-    <!-- Row shown when there is no matching data. -->
-    <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-    </tr>
-    </table>
-</div>
+            <!-- Columna Rol -->
+            <ng-container matColumnDef="role">
+                <th mat-header-cell *matHeaderCellDef> Rol </th>
+                <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+            </ng-container>
 
+            <!-- Columna Detalles -->
+            <ng-container matColumnDef="detalles">
+              <th mat-header-cell *matHeaderCellDef> Detalles </th>
+              <td mat-cell *matCellDef="let element">
+                  <button mat-button (click)="verDetalles(element.id)">Ver Detalles</button>
+              </td>
+            </ng-container>
+
+
+            <!-- Filas de la tabla -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <!-- Mensaje cuando no hay datos que coincidan con el filtro -->
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="3">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>

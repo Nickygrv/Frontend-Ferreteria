@@ -32,6 +32,7 @@ import { PerfilUsuarioComponent } from './pages/perfil-usuario/perfil-usuario.co
 import { RegistrarUsuarioComponent } from './pages/registrar-usuario/registrar-usuario.component';
 import { ListaUsuariosComponent } from './pages/lista-usuarios/lista-usuarios.component';
 import { ListaProductosComponent } from './pages/lista-productos/lista-productos.component';
+import { DetallesUsuarioComponent } from './pages/detalles-usuario/detalles-usuario.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ListaProductosComponent } from './pages/lista-productos/lista-productos
     RegistrarUsuarioComponent,
     ListaUsuariosComponent,
     ListaProductosComponent,
+    DetallesUsuarioComponent,
   ],
   imports: [
     BrowserModule,
