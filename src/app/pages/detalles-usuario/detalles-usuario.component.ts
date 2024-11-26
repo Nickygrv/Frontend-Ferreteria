@@ -22,19 +22,17 @@ export class DetallesUsuarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Obtener el ID del usuario de la ruta
     const id = this.route.snapshot.paramMap.get('id');
-
     if (id) {
-      // Hacer la solicitud HTTP para obtener los detalles del usuario
-      this.http.get<any>(`http://localhost:3000/api/usuarios/${id}`).subscribe(
-        data => {
-          this.usuario = data;  // Asignar los datos recibidos
-        },
-        error => {
-          console.error('Error al obtener los detalles del usuario', error);
-        }
-      );
+        this.http.get<any>(`http://localhost:3000/api/usuarios/detalles/${id}`).subscribe(
+            data => {
+                this.usuario = data;
+            },
+            error => {
+                console.error('Error al obtener los detalles del usuario:', error);
+            }
+        );
     }
-  }
+}
+
 }
