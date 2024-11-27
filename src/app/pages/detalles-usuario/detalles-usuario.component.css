@@ -1,68 +1,47 @@
-/* Contenedor general */
+/* Contenedor centrado */
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 64px); /* Ajusta según la altura del navbar */
-    padding: 20px;
-    background-color: #f9f9f9;
-    box-sizing: border-box;
-  }
-  
-  /* Contenedor de la tabla */
-  .table-container {
-    text-align: center;
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 500px;
-  }
-  
-  /* Título */
-  .title {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333333;
-    font-weight: bold;
-  }
-  
-  /* Tabla de detalles */
-  .details-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  .details-table th, .details-table td {
-    text-align: left;
-    padding: 10px;
-    border: 1px solid #e0e0e0;
-  }
-  
-  .details-table th {
-    background-color: #f5f5f5;
-    font-weight: bold;
-    color: #666666;
-  }
-  
-  .details-table td {
-    color: #333333;
-  }
-  
-  /* Botón */
-  .back-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .back-button:hover {
-    background-color: #0056b3;
-  }
-  
+  margin: 20px auto;
+  max-width: 600px; /* Ancho máximo para que sea compacto */
+  text-align: center;
+  border-radius: 8px;
+  background-color: #f8f9fa; /* Fondo claro */
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Estilo para el título */
+h2 {
+  font-size: 24px;
+  color: #343a40; /* Gris oscuro */
+  margin-bottom: 20px;
+}
+
+/* Tabla estilizada */
+table {
+  width: 100%;
+  border-collapse: collapse; /* Sin separación entre bordes */
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Estilo para las filas de la tabla */
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd; /* Bordes suaves */
+}
+
+td.label {
+  font-weight: bold; /* Títulos de las filas */
+  color: #495057; /* Gris oscuro */
+}
+
+td.value {
+  color: #212529; /* Texto más oscuro */
+}
+
+/* Hover en las filas */
+tbody tr:hover {
+  background-color: #f1f1f1; /* Color de hover */
+}

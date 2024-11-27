@@ -21,7 +21,7 @@ export class DetallesUsuarioComponent implements OnInit {
     this.router.navigate(['/lista-usuarios']);  // Redirige a la lista de usuarios
   }
 
-  ngOnInit(): void {
+ ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
         this.http.get<any>(`http://localhost:3000/api/usuarios/detalles/${id}`).subscribe(
