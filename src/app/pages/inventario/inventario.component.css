@@ -3,18 +3,33 @@ table {
 }
 
 .mat-mdc-form-field {
-font-size: 14px;
-width: 100%;
+  font-size: 14px;
+  width: 100%;
 }
 
 .example-button-container {
-position: fixed;
-bottom: 490px; /* Opcional: ajusta la distancia desde la parte inferior */
-right: 32px; /* Ajusta la distancia desde el borde derecho */
+  position: fixed;
+  bottom: 490px; /* Opcional: ajusta la distancia desde la parte inferior */
+  right: 32px; /* Ajusta la distancia desde el borde derecho */
 }
 
 img, svg {
   vertical-align: middle;
   height: 250px;
   width: 250px;
+}
+
+/* Estilos para el filtro de precio */
+.price-filter {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+mat-form-field {
+  width: 48%;
+}
+
+button {
+  margin-left: 10px;
 }

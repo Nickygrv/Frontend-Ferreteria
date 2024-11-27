@@ -25,9 +25,22 @@ export class InventarioComponent {
   displayedColumns: string[] = ['id', 'nombre', 'imagen', 'precio', 'stock', 'descripcion', 'deleteicon', 'updateicon'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
+  minPrice: number = 0;
+  maxPrice: number = 10000;
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  applyPriceFilter(): void {
+    // Filtrar productos por el rango de precios
+    const filteredData = this.dataSource.data.filter(product => {
+      return product.precio >= this.minPrice && product.precio <= this.maxPrice;
+    });
+
+    // Actualizar la dataSource con los productos filtrados
+    this.dataSource.data = filteredData;
   }
 
   constructor(

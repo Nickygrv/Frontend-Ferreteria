@@ -15,11 +15,26 @@
 </div>
 <br>
 <div class="container">
+  <!-- Filtro de precio -->
+  <div class="price-filter">
+    <mat-form-field appearance="fill">
+      <mat-label>Precio mínimo</mat-label>
+      <input matInput [(ngModel)]="minPrice" type="number" placeholder="Precio mínimo">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Precio máximo</mat-label>
+      <input matInput [(ngModel)]="maxPrice" type="number" placeholder="Precio máximo">
+    </mat-form-field>
+
+    <button mat-raised-button (click)="applyPriceFilter()">Aplicar filtro</button>
+  </div>
+
   <mat-form-field>
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
   </mat-form-field>
-  
+
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <!-- ID Column -->
     <ng-container matColumnDef="id">
