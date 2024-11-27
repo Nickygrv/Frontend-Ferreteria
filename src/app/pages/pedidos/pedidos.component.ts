@@ -6,76 +6,68 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './pedidos.component.html',
   styleUrls: ['./pedidos.component.css'],
 })
-export class PedidosComponent implements OnInit{
-  // declarar un arreglo para guardar los nombres de los productos pero que solo se guarde el string del nombre
-  nombreProducto: string[] = [];
+export class PedidosComponent implements OnInit {
+  productos: any[] = []; // Lista de productos desde el backend
+  pedido = {
+    producto: '',
+    cantidad: 1,
+  };
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get<string[]>('http://localhost:3000/api/productos').subscribe(
+    this.cargarProductos();
+  }
+
+  // Cargar la lista de productos desde el backend
+  cargarProductos(): void {
+    this.http.get('http://localhost:3000/api/datos').subscribe(
       (response: any) => {
-        this.nombreProducto = [];
-        for (let i = 0; i < response.length; i++) {
-          this.nombreProducto.push(response[i].nombre);
-        }
-        console.log(this.nombreProducto);
+        this.productos = response; // Asignar la lista de productos
       },
-      (error: any) => {
-        console.error('Error al obtener los nombres de los productos', error);
+      (error) => {
+        console.error('Error al cargar los productos:', error);
       }
     );
   }
-  
 
-  pedido = {
-    nombre: '',
-    ci: '',
-    celular: '',
-    fecha: '',
-    producto: '',
-    cantidad: 1
-  };
+  // Enviar el pedido al backend
+  realizarPedido(): void {
+    const userId = localStorage.getItem('userId'); // Obtener el ID del usuario logueado
 
-  submitForm() {
-    const orden = {
-      usuario_id: localStorage.getItem('userId'),
+    if (!userId) {
+      alert('Error: Usuario no autenticado');
+      return;
+    }
+
+    // Buscar el stock del producto seleccionado
+    const productoSeleccionado = this.productos.find(
+      (prod) => prod.nombre === this.pedido.producto
+    );
+
+    if (this.pedido.cantidad > productoSeleccionado.stock) {
+      alert(
+        `No puedes pedir más de ${productoSeleccionado.stock} unidades de ${productoSeleccionado.nombre}.`
+      );
+      return;
+    }
+
+    const nuevoPedido = {
+      usuario_id: userId,
       nombreProducto: this.pedido.producto,
-      fecha: this.pedido.fecha,
-      cantidad: this.pedido.cantidad
+      fecha: new Date().toISOString().slice(0, 10), // Fecha actual (YYYY-MM-DD)
+      cantidad: this.pedido.cantidad,
     };
-    console.log(this.pedido.producto);
-    this.http.post<any>('http://localhost:3000/api/pedidos', orden).subscribe(
-      response => {
-        console.log(response); // Muestra la respuesta del backend en la consola
-        // Aquí puedes mostrar un mensaje en el frontend para indicar que el pedido se guardó correctamente
-        alert('Pedido guardado correctamente');
 
-        // Se limpia el formulario
-        this.pedido = {
-          nombre: '',
-          ci: '',
-          celular: '',
-          fecha: '',
-          producto: '',
-          cantidad: 1
-        };
-        // Se redirecciona a la página home
-        window.location.href = '/home';
+    this.http.post('http://localhost:3000/api/pedidos', nuevoPedido).subscribe(
+      (response) => {
+        alert('Pedido realizado exitosamente');
+        this.pedido = { producto: '', cantidad: 1 }; // Resetear el formulario
+        this.cargarProductos(); // Refrescar la lista de productos
       },
-      error => {
-        console.error(error); // Muestra el error en la consola
-        // Aquí puedes mostrar un mensaje de error en el frontend
-        alert('Ocurrió un error al guardar el pedido');
-        // Se limpia el formulario
-        this.pedido = {
-          nombre: '',
-          ci: '',
-          celular: '',
-          fecha: '',
-          producto: '',
-          cantidad: 1
-        };
+      (error) => {
+        console.error('Error al realizar el pedido:', error);
+        alert('Hubo un error al realizar el pedido. Intenta de nuevo.');
       }
     );
   }

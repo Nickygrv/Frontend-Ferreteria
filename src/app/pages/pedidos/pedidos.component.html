@@ -3,48 +3,32 @@
 <br>
 <br>
 <br>
-<h1 style="text-align: center;">PEDIDOS</h1>
-<form class="form" (ngSubmit)="submitForm()">
-    <mat-form-field class="input">
-      <mat-label>Nombre del cliente</mat-label>
-      <input matInput placeholder="Ingrese su nombre" [(ngModel)]="pedido.nombre" name="nombre" required>
-    </mat-form-field>
-    <br>
-    <table class="example-full-width" cellspacing="0">
-        <tr>
-            <td>
-                <mat-form-field class="input2">
-                    <mat-label>C.I.</mat-label>
-                    <input matInput type="number" placeholder="Ingrese su CI" [(ngModel)]="pedido.ci" name="ci" required>
-                </mat-form-field>
-            </td>
-            <td>
-                <mat-form-field class="input2">
-                    <mat-label>Celular</mat-label>
-                    <input matInput type="number" placeholder="Su numero de celular" [(ngModel)]="pedido.celular" name="celular" required>
-                </mat-form-field>
-            </td>
-        </tr>
-    </table>
-    <mat-form-field class="input">
-      <mat-label>Fecha del pedido</mat-label>
-      <input matInput [matDatepicker]="picker" placeholder="Seleccione una fecha" [(ngModel)]="pedido.fecha" name="fecha" required>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <br>    
-    <mat-form-field class="input">
-      <mat-label>Producto</mat-label>
-      <mat-select [(ngModel)]="pedido.producto" name="producto" required>
-        <mat-option *ngFor="let nombre of nombreProducto" [value]="nombre">{{ nombre }}</mat-option>
+<div class="container mt-5">
+  <h1>Realizar Pedido</h1>
+
+  <!-- Formulario de pedido -->
+  <form (ngSubmit)="realizarPedido()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Seleccionar Producto</mat-label>
+      <mat-select [(value)]="pedido.producto" required>
+        <mat-option *ngFor="let producto of productos" [value]="producto.nombre">
+          {{ producto.nombre }} (Stock: {{ producto.stock }})
+        </mat-option>
       </mat-select>
     </mat-form-field>
-    <br>
-    <mat-form-field class="input">
+
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label>Cantidad</mat-label>
-      <input matInput type="number" placeholder="Ingrese la cantidad deseada" [(ngModel)]="pedido.cantidad" name="cantidad" required>
+      <input
+        matInput
+        type="number"
+        [(ngModel)]="pedido.cantidad"
+        name="cantidad"
+        min="1"
+        required
+      />
     </mat-form-field>
-    <br>
-    <button mat-raised-button color="primary" type="submit">Realizar pedido</button>
+
+    <button mat-raised-button color="primary" type="submit">Hacer Pedido</button>
   </form>
-  
+</div>
