@@ -12,6 +12,7 @@ import { RegistrarUsuarioComponent } from './pages/registrar-usuario/registrar-u
 import { ListaUsuariosComponent } from './pages/lista-usuarios/lista-usuarios.component';
 import {ListaProductosComponent} from "./pages/lista-productos/lista-productos.component";
 import { DetallesUsuarioComponent } from './pages/detalles-usuario/detalles-usuario.component';
+import { PedidosAdminComponent } from './pages/pedidos-admin/pedidos-admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'registrar-usuario', component: RegistrarUsuarioComponent },
   { path: 'lista-usuarios', component: ListaUsuariosComponent },
   { path: 'lista-productos', component: ListaProductosComponent},
+  { path: 'pedidos-admin', component: PedidosAdminComponent },
   { path: 'detalles-usuario/:id', component: DetallesUsuarioComponent }
 ];
 

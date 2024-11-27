@@ -33,6 +33,7 @@ import { RegistrarUsuarioComponent } from './pages/registrar-usuario/registrar-u
 import { ListaUsuariosComponent } from './pages/lista-usuarios/lista-usuarios.component';
 import { ListaProductosComponent } from './pages/lista-productos/lista-productos.component';
 import { DetallesUsuarioComponent } from './pages/detalles-usuario/detalles-usuario.component';
+import { PedidosAdminComponent } from './pages/pedidos-admin/pedidos-admin.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { DetallesUsuarioComponent } from './pages/detalles-usuario/detalles-usua
     ListaUsuariosComponent,
     ListaProductosComponent,
     DetallesUsuarioComponent,
+    PedidosAdminComponent,
   ],
   imports: [
     BrowserModule,

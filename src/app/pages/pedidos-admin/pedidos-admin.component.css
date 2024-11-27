@@ -1,0 +1,21 @@
+.container {
+    margin-top: 20px;
+  }
+  
+  .mat-table {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .mat-header-row {
+    background-color: #f1f1f1;
+  }
+  
+  .mat-cell {
+    padding: 10px;
+  }
+  
+  .mat-header-cell {
+    font-weight: bold;
+  }
+  

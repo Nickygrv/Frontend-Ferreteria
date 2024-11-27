@@ -8,6 +8,7 @@
         <button mat-raised-button routerLink="/lista-usuarios" *ngIf="userRole === 'admin'">Usuarios</button>
         <button mat-raised-button routerLink="/lista-productos" *ngIf="userRole === 'user'">Productos</button>
         <button mat-raised-button routerLink="/pedidos" *ngIf="userRole === 'user' || userRole === 'admin'">Pedidos</button>
+        <button mat-raised-button routerLink="/pedidos-admin" *ngIf="userRole === 'admin'">Historial Pedidos</button>
         <button mat-raised-button routerLink="/contactos" *ngIf="userRole === 'user' || userRole === 'admin'">Contactos</button>
 
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User menu">
