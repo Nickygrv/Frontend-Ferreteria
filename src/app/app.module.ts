@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort'; // Para ordenar las columnas
 
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -70,6 +72,10 @@ import { PedidosAdminComponent } from './pages/pedidos-admin/pedidos-admin.compo
     MatSelectModule,
     MatInputModule,
     FormsModule,
+    MatTableModule,         // Módulo de la tabla
+    MatPaginatorModule,     // Módulo de paginación
+    MatSortModule,          // Módulo para ordenamiento
+    MatButtonModule, 
     ReactiveFormsModule,
     HttpClientModule,
     MatDatepickerModule,
