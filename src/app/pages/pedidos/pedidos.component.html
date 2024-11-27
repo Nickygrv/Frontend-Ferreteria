@@ -8,15 +8,18 @@
 
   <!-- Formulario de pedido -->
   <form (ngSubmit)="realizarPedido()">
+    <!-- Campo para seleccionar el producto -->
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Seleccionar Producto</mat-label>
-      <mat-select [(value)]="pedido.producto" required>
-        <mat-option *ngFor="let producto of productos" [value]="producto.nombre">
+      <mat-select [(ngModel)]="pedido.producto" name="producto" required>
+        <mat-option value="" disabled>Selecciona un producto</mat-option>
+        <mat-option *ngFor="let producto of productos" [value]="producto.id">
           {{ producto.nombre }} (Stock: {{ producto.stock }})
         </mat-option>
       </mat-select>
     </mat-form-field>
 
+    <!-- Campo para ingresar la cantidad -->
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Cantidad</mat-label>
       <input
@@ -29,6 +32,9 @@
       />
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit">Hacer Pedido</button>
+    <!-- Botón para enviar el formulario -->
+    <button mat-raised-button color="primary" type="submit">
+      Hacer Pedido
+    </button>
   </form>
 </div>

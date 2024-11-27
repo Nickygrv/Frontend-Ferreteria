@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class PedidosComponent implements OnInit {
   productos: any[] = []; // Lista de productos desde el backend
   pedido = {
-    producto: '',
+    producto: '', // Aquí se guarda el ID del producto seleccionado
     cantidad: 1,
   };
 
@@ -23,6 +23,7 @@ export class PedidosComponent implements OnInit {
   cargarProductos(): void {
     this.http.get('http://localhost:3000/api/datos').subscribe(
       (response: any) => {
+        console.log('Productos recibidos:', response); // Log para depuración
         this.productos = response; // Asignar la lista de productos
       },
       (error) => {
@@ -40,11 +41,23 @@ export class PedidosComponent implements OnInit {
       return;
     }
 
-    // Buscar el stock del producto seleccionado
+    // Validar que se haya seleccionado un producto
+    if (!this.pedido.producto) {
+      alert('Por favor, selecciona un producto.');
+      return;
+    }
+
+    // Buscar el producto seleccionado para validar su stock
     const productoSeleccionado = this.productos.find(
-      (prod) => prod.nombre === this.pedido.producto
+      (prod) => prod.id === +this.pedido.producto // Convertir a número antes de comparar
     );
 
+    if (!productoSeleccionado) {
+      alert('El producto seleccionado no es válido.');
+      return;
+    }
+
+    // Validar el stock del producto seleccionado
     if (this.pedido.cantidad > productoSeleccionado.stock) {
       alert(
         `No puedes pedir más de ${productoSeleccionado.stock} unidades de ${productoSeleccionado.nombre}.`
@@ -52,13 +65,15 @@ export class PedidosComponent implements OnInit {
       return;
     }
 
+    // Construir el objeto del nuevo pedido
     const nuevoPedido = {
       usuario_id: userId,
-      nombreProducto: this.pedido.producto,
-      fecha: new Date().toISOString().slice(0, 10), // Fecha actual (YYYY-MM-DD)
+      producto_id: productoSeleccionado.id, // Enviar el ID del producto
       cantidad: this.pedido.cantidad,
+      fecha: new Date().toISOString().slice(0, 10), // Fecha actual (YYYY-MM-DD)
     };
 
+    // Enviar el pedido al backend
     this.http.post('http://localhost:3000/api/pedidos', nuevoPedido).subscribe(
       (response) => {
         alert('Pedido realizado exitosamente');

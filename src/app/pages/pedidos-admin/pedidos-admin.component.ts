@@ -28,7 +28,7 @@ export class PedidosAdminComponent implements OnInit {
   }
 
   obtenerPedidos(): void {
-    this.http.get('http://localhost:3000/api/pedidos').subscribe(
+    this.http.get('http://localhost:3000/api/pedidos/detallados').subscribe(
       (response: any) => {
         this.pedidos = response; // Asignar los pedidos a la variable pedidos
         this.dataSource = new MatTableDataSource(this.pedidos); // Asignar los pedidos a la fuente de datos

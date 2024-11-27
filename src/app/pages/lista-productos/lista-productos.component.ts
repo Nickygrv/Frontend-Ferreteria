@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { PageEvent } from '@angular/material/paginator'; // Importar PageEvent
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { PageEvent } from '@angular/material/paginator';
 
 export interface ProductList {
   id: number;
@@ -11,16 +11,14 @@ export interface ProductList {
   precio: number;
 }
 
-const ELEMENT_DATA: ProductList[] = [];
-
 @Component({
   selector: 'app-lista-productos',
   templateUrl: './lista-productos.component.html',
   styleUrls: ['./lista-productos.component.css']
 })
-export class ListaProductosComponent {
+export class ListaProductosComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'precio'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<ProductList>([]);
 
   // Variables para el rango de precios
   minPrice: number = 0;
@@ -46,24 +44,42 @@ export class ListaProductosComponent {
 
   // Cargar productos desde la API con paginación y filtros
   loadProducts() {
-    const params = {
-      min: this.minPrice.toString(),
-      max: this.maxPrice.toString(),
-      page: this.currentPage.toString(),
-      size: this.pageSize.toString(),
-      filter: this.filterValue.trim().toLowerCase(), // Agregar parámetro de búsqueda
-    };
+    let params = new HttpParams();
 
-    this.http.get('http://localhost:3000/api/productos', { params }).subscribe((data: any) => {
-      this.dataSource.data = data.products;  // Productos filtrados y paginados
-      this.totalProducts = data.total;  // Total de productos
-      console.log(data);
-    });
+    // Agregar parámetros de búsqueda
+    if (this.minPrice) {
+      params = params.set('min', this.minPrice.toString());
+    }
+    if (this.maxPrice) {
+      params = params.set('max', this.maxPrice.toString());
+    }
+    if (this.filterValue.trim()) {
+      params = params.set('filter', this.filterValue.trim().toLowerCase());
+    }
+
+    // Agregar parámetros de paginación
+    params = params.set('page', this.currentPage.toString());
+    params = params.set('size', this.pageSize.toString());
+
+    // Realizar la solicitud HTTP
+    this.http
+      .get('http://localhost:3000/api/productos-filtrados', { params })
+      .subscribe(
+        (data: any) => {
+          this.dataSource.data = data.products || [];
+          this.totalProducts = data.total || 0;
+        },
+        (error) => {
+          console.error('Error al cargar los productos:', error);
+          this.dataSource.data = [];
+          this.totalProducts = 0;
+        }
+      );
   }
 
   // Filtrar productos por rango de precios
   applyPriceFilter() {
-    this.currentPage = 0;  // Resetear la página cuando se aplica un filtro
+    this.currentPage = 0; // Resetear la página cuando se aplica un filtro
     this.loadProducts();
   }
 
@@ -71,13 +87,13 @@ export class ListaProductosComponent {
   onPageChange(event: PageEvent) {
     this.currentPage = event.pageIndex;
     this.pageSize = event.pageSize;
-    this.loadProducts();  // Volver a cargar los productos cuando la página cambia
+    this.loadProducts(); // Volver a cargar los productos cuando la página cambia
   }
 
   // Filtrar por búsqueda
   applySearchFilter(event: Event) {
     this.filterValue = (event.target as HTMLInputElement).value;
-    this.currentPage = 0;  // Resetear la página cuando se cambia la búsqueda
+    this.currentPage = 0; // Resetear la página cuando se cambia la búsqueda
     this.loadProducts();
   }
 }
