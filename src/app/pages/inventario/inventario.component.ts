@@ -27,20 +27,48 @@ export class InventarioComponent {
 
   minPrice: number = 0;
   maxPrice: number = 10000;
+  searchFilter: string = ''; // Variable para almacenar el filtro de búsqueda
+
+  // Variables de control para evitar problemas con los filtros
+  private originalData: ProductsInventory[] = [];
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.searchFilter = (event.target as HTMLInputElement).value;
+    this.filterData();
   }
 
   applyPriceFilter(): void {
-    // Filtrar productos por el rango de precios
-    const filteredData = this.dataSource.data.filter(product => {
-      return product.precio >= this.minPrice && product.precio <= this.maxPrice;
-    });
+    // Restablecer el filtro de búsqueda y aplicar filtro de precios
+    this.searchFilter = '';
+    this.filterData();
+  }
+
+  filterData(): void {
+    // Filtrar por precio
+    let filteredByPrice = this.originalData.filter(product => 
+      product.precio >= this.minPrice && product.precio <= this.maxPrice
+    );
+
+    // Luego aplicar el filtro de búsqueda sobre los resultados filtrados por precio
+    if (this.searchFilter.trim()) {
+      filteredByPrice = this.applySearchFilter(filteredByPrice);
+    }
 
     // Actualizar la dataSource con los productos filtrados
-    this.dataSource.data = filteredData;
+    this.dataSource.data = filteredByPrice;
+  }
+
+  applySearchFilter(filteredData: ProductsInventory[]): ProductsInventory[] {
+    const filterValue = this.searchFilter.trim().toLowerCase();
+
+    return filteredData.filter(product => {
+      return (
+        product.nombre.toLowerCase().includes(filterValue) || 
+        product.descripcion.toLowerCase().includes(filterValue) || 
+        product.precio.toString().includes(filterValue) ||
+        product.stock.toString().includes(filterValue)
+      );
+    });
   }
 
   constructor(
@@ -53,6 +81,7 @@ export class InventarioComponent {
     this.http.get<ProductsInventory[]>('http://localhost:3000/api/datos').subscribe(
       (data) => {
         console.log('Datos obtenidos:', data);
+        this.originalData = data; // Guardar los datos originales
         this.dataSource.data = data; // Asignar los datos obtenidos a la dataSource
       },
       (error) => {
@@ -60,7 +89,6 @@ export class InventarioComponent {
       }
     );
   }
-  
 
   navigateToUpdatePage(productId: number) {
     this.router.navigate(['/actualizar-producto', productId]);
@@ -75,7 +103,8 @@ export class InventarioComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         // Filtra el producto para eliminarlo
-        this.dataSource.data = this.dataSource.data.filter(product => product.id !== Number(id));  // Convertir id a number
+        this.originalData = this.originalData.filter(product => product.id !== Number(id));  // Convertir id a number
+        this.filterData(); // Reaplicar los filtros después de eliminar un producto
       }
     });
   }
