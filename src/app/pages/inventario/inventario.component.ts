@@ -13,7 +13,7 @@ export interface ProductsInventory {
   stock: number;
   descripcion: string;
 }
- 
+
 const ELEMENT_DATA: ProductsInventory[] = [];
 
 @Component({
@@ -29,9 +29,9 @@ export class InventarioComponent {
   maxPrice: number = 10000;
   searchFilter: string = ''; // Variable para almacenar el filtro de búsqueda
 
-  // Variables de control para evitar problemas con los filtros
   private originalData: ProductsInventory[] = [];
 
+  // Función para manejar el filtro de búsqueda
   applyFilter(event: Event) {
     this.searchFilter = (event.target as HTMLInputElement).value;
     this.filterData();
@@ -42,8 +42,26 @@ export class InventarioComponent {
     if (this.minPrice < 0) this.minPrice = 0;
     if (this.maxPrice < 0) this.maxPrice = 0;
 
-    // Restablecer el filtro de búsqueda y aplicar filtro de precios
-    this.searchFilter = '';
+    // Validación de precios
+    if (this.minPrice > this.maxPrice) {
+      alert('El precio mínimo no puede ser mayor que el precio máximo.');
+      this.searchFilter = ''; // Limpiar el filtro de búsqueda si los precios son incorrectos
+      this.minPrice = 0; // Reiniciar el precio mínimo
+      this.maxPrice = 10000; // Reiniciar el precio máximo
+      this.filterData(); // Volver a aplicar el filtro con los valores reiniciados
+      return;
+    }
+
+    if (this.maxPrice < this.minPrice) {
+      alert('El precio máximo no puede ser menor que el precio mínimo.');
+      this.searchFilter = ''; // Limpiar el filtro de búsqueda si los precios son incorrectos
+      this.minPrice = 0; // Reiniciar el precio mínimo
+      this.maxPrice = 10000; // Reiniciar el precio máximo
+      this.filterData(); // Volver a aplicar el filtro con los valores reiniciados
+      return;
+    }
+
+    // Si los valores de precio son válidos, solo filtramos sin limpiar el filtro de búsqueda
     this.filterData();
   }
 
