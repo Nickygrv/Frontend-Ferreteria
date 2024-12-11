@@ -47,10 +47,10 @@ export class ListaProductosComponent implements OnInit {
     let params = new HttpParams();
 
     // Agregar parámetros de búsqueda
-    if (this.minPrice) {
+    if (this.minPrice > 0) { // Solo agregar minPrice si es mayor que 0
       params = params.set('min', this.minPrice.toString());
     }
-    if (this.maxPrice) {
+    if (this.maxPrice > 0) { // Solo agregar maxPrice si es mayor que 0
       params = params.set('max', this.maxPrice.toString());
     }
     if (this.filterValue.trim()) {
@@ -80,7 +80,14 @@ export class ListaProductosComponent implements OnInit {
   // Filtrar productos por rango de precios
   applyPriceFilter() {
     this.currentPage = 0; // Resetear la página cuando se aplica un filtro
-    this.loadProducts();
+
+    // Verificar si los precios son válidos
+    if (this.minPrice > 0 || this.maxPrice > 0) {
+      this.loadProducts(); // Cargar productos con el filtro
+    } else {
+      alert('Por favor ingrese un rango de precios válido.');
+      this.loadProducts(); // Cargar productos sin filtro
+    }
   }
 
   // Manejar cambio de página
