@@ -1,8 +1,15 @@
 <br>
 <br>
 <br>
-<br><h1 style="text-align: center;">Lista de Productos</h1>
+<br>
+<h1 style="text-align: center;">Lista de Productos</h1>
+
 <div class="container">
+  <!-- Mensaje de error de precio -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
   <!-- Filtro de precio -->
   <div class="price-filter">
     <mat-form-field appearance="fill">
@@ -18,11 +25,13 @@
     <button mat-raised-button (click)="applyPriceFilter()">Aplicar filtro</button>
   </div>
 
+  <!-- Filtro de búsqueda -->
   <mat-form-field>
     <mat-label>Buscar producto</mat-label>
-    <input matInput (keyup)="applySearchFilter($event)" placeholder="Ex. ium" #input>
+    <input matInput (keyup)="applySearchFilter($event)" placeholder="Ingrese Criterio de Busqueda" #input>
   </mat-form-field>
 
+  <!-- Tabla de productos -->
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
