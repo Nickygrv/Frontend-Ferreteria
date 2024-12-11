@@ -19,9 +19,9 @@ export class PerfilUsuarioComponent implements OnInit {
     // Comprobar si el ID del usuario existe
     if (this.usuarioId) {
       // Solicitud al backend para obtener los datos del perfil por ID de usuario
-      this.http.get('http://localhost:3000/perfil/' + this.usuarioId).subscribe((data: any) => {
+      this.http.get('http://localhost:3000/api/usuarios/detalles/' + this.usuarioId).subscribe((data: any) => {
         this.perfil = data; // Asignar los datos obtenidos al objeto perfil
-        console.log(data);
+        console.log(data); // Ver los datos recibidos en consola
       }, (error) => {
         console.error('Error al obtener el perfil:', error);
         alert('Error al obtener el perfil');
@@ -34,12 +34,21 @@ export class PerfilUsuarioComponent implements OnInit {
   
 
   submitForm() {
+    // Verifica si el perfil tiene los campos correctamente llenados antes de enviar la solicitud
+    if (!this.perfil.nombre || !this.perfil.correo_electronico || !this.perfil.direccion || !this.perfil.telefono) {
+      alert("Por favor, complete todos los campos.");
+      return; // Evita enviar el formulario si faltan campos
+    }
+
     // Solicitud al backend para actualizar los datos del perfil
-    this.http.put('http://localhost:3000/perfil/' + this.usuarioId, this.perfil).subscribe((response: any) => {
+    this.http.put('http://localhost:3000/api/usuarios/detalles/' + this.usuarioId, this.perfil).subscribe((response: any) => {
       console.log('Perfil actualizado exitosamente');
       alert('Perfil actualizado exitosamente');
       // Redireccionar a la página de inicio o a otra página relevante
       window.location.href = '/perfil';
+    }, (error) => {
+      console.error('Error al actualizar el perfil:', error);
+      alert('Error al actualizar el perfil');
     });
   }
 }
