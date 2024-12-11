@@ -22,7 +22,22 @@ export class ActualizarProductoComponent implements OnInit {
     });
   }
 
+  // Verificar que todos los campos requeridos están completos y son válidos
+  formularioValido(): boolean {
+    return (
+      this.producto.nombre.trim() !== '' &&
+      this.producto.imagen.trim() !== '' &&
+      this.producto.precio > 0 &&
+      this.producto.stock > 0
+    );
+  }
+
   submitForm() {
+    if (!this.formularioValido()) {
+      alert('Por favor, completa todos los campos correctamente.');
+      return;
+    }
+
     // Realizar la solicitud al backend para guardar las modificaciones del producto
     this.http.put('http://localhost:3000/productos/' + this.producto.id, this.producto).subscribe((response: any) => {
       console.log('Producto actualizado exitosamente');
