@@ -2,30 +2,32 @@
     <img src="https://i.ibb.co/bBfbLtn/martillo.png" alt="bolsa-de-la-compra" style="height: 45px; width: 45px;">
     <span>Ferreteria UCB</span>
     <div class="spacer"></div>
-
-        <button mat-raised-button routerLink="/" *ngIf="userRole === 'user' || userRole === 'admin'">Home</button>
-        <button mat-raised-button routerLink="/inventario" *ngIf="userRole === 'admin'">Inventario</button>
-        <button mat-raised-button routerLink="/lista-usuarios" *ngIf="userRole === 'admin'">Usuarios</button>
-        <button mat-raised-button routerLink="/lista-productos" *ngIf="userRole === 'user'">Productos</button>
-        <button mat-raised-button routerLink="/pedidos" *ngIf="userRole === 'user' ">Pedidos</button>
-        <button mat-raised-button routerLink="/pedidos-admin" *ngIf="userRole === 'admin'">Historial Pedidos</button>
-        <button mat-raised-button routerLink="/contactos" *ngIf="userRole === 'user' || userRole === 'admin'">Contactos</button>
-
+  
+    <button mat-raised-button routerLink="/">Home</button>
+    <button mat-raised-button routerLink="/inventario" *ngIf="userRole === 'admin'">Inventario</button>
+    <button mat-raised-button routerLink="/lista-usuarios" *ngIf="userRole === 'admin'">Usuarios</button>
+    <button mat-raised-button routerLink="/lista-productos" *ngIf="userRole === 'user'">Productos</button>
+    <button mat-raised-button routerLink="/pedidos" *ngIf="userRole === 'user'">Pedidos</button>
+    <button mat-raised-button routerLink="/pedidos-admin" *ngIf="userRole === 'admin'">Historial Pedidos</button>
+    <button mat-raised-button routerLink="/contactos" *ngIf="userRole === 'user' || userRole === 'admin'">Contactos</button>
+  
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User menu">
-    <mat-icon class="material-icons-outlined" style="color: black;">account_circle</mat-icon>
+      <mat-icon class="material-icons-outlined" style="color: black;">account_circle</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/login">
-            <mat-icon>account_circle</mat-icon>
-            <span>Log In</span>
-        </button>
-        <button mat-menu-item routerLink="/perfil" *ngIf="userRole === 'user' || userRole === 'admin'">
-            <mat-icon>account_circle</mat-icon>
-            <span>Mi Perfil</span>
-        </button>
-        <button mat-menu-item (click)="logout()">
-            <mat-icon>exit_to_app</mat-icon>
-            <span >Cerrar sesión</span>
-        </button>
+      <button mat-menu-item routerLink="/login" *ngIf="!userRole">
+        <mat-icon>account_circle</mat-icon>
+        <span>Log In</span>
+      </button>
+      <button mat-menu-item routerLink="/perfil" *ngIf="userRole">
+        <mat-icon>account_circle</mat-icon>
+        <span>Mi Perfil</span>
+      </button>
+      <button mat-menu-item routerLink="/home" (click)="logout()" *ngIf="userRole">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Cerrar sesión</span>
+      </button>
+      
     </mat-menu>
-</div>
+  </div>
+  
