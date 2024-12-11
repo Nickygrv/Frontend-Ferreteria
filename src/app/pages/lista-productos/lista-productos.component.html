@@ -1,54 +1,45 @@
-<br><br><br><br><br>
-<h1 style="text-align: center;">LISTA DE PRODUCTOS</h1>
-
+<br>
+<br>
+<br>
+<br><h1 style="text-align: center;">Lista de Productos</h1>
 <div class="container">
-  <!-- Formulario para filtrar por precio -->
-  <mat-form-field>
-    <mat-label>Filtrar por precio mínimo</mat-label>
-    <input matInput type="number" [(ngModel)]="minPrice" placeholder="Ingresa un precio mínimo">
-  </mat-form-field>
+  <!-- Filtro de precio -->
+  <div class="price-filter">
+    <mat-form-field appearance="fill">
+      <mat-label>Precio mínimo</mat-label>
+      <input matInput [(ngModel)]="minPrice" type="number" min="0" placeholder="Precio mínimo">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Precio máximo</mat-label>
+      <input matInput [(ngModel)]="maxPrice" type="number" min="0" placeholder="Precio máximo">
+    </mat-form-field>
+
+    <button mat-raised-button (click)="applyPriceFilter()">Aplicar filtro</button>
+  </div>
 
   <mat-form-field>
-    <mat-label>Filtrar por precio máximo</mat-label>
-    <input matInput type="number" [(ngModel)]="maxPrice" placeholder="Ingresa un precio máximo">
+    <mat-label>Buscar producto</mat-label>
+    <input matInput (keyup)="applySearchFilter($event)" placeholder="Ex. ium" #input>
   </mat-form-field>
 
-  <button mat-raised-button color="primary" (click)="applyPriceFilter()">Aplicar filtro</button>
-
-  <!-- Filtro de búsqueda -->
-  <mat-form-field>
-    <mat-label>Buscar productos</mat-label>
-    <input matInput (input)="applySearchFilter($event)" placeholder="Buscar por nombre">
-  </mat-form-field>
-
-  <!-- Tabla de productos -->
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource.data.length > 0">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
     </ng-container>
 
     <ng-container matColumnDef="nombre">
       <th mat-header-cell *matHeaderCellDef> Nombre </th>
-      <td mat-cell *matCellDef="let element"> {{ element.nombre }} </td>
+      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
     </ng-container>
 
     <ng-container matColumnDef="precio">
       <th mat-header-cell *matHeaderCellDef> Precio </th>
-      <td mat-cell *matCellDef="let element"> {{ element.precio }} </td>
+      <td mat-cell *matCellDef="let element"> {{element.precio}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-
-  <!-- Mensaje cuando no hay productos -->
-  <div *ngIf="dataSource.data.length === 0" style="text-align: center; margin-top: 20px;">
-    <p>No hay productos disponibles con los filtros actuales.</p>
-  </div>
-
-  <!-- Paginación -->
-  <mat-paginator [length]="totalProducts" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]"
-                 (page)="onPageChange($event)">
-  </mat-paginator>
 </div>
