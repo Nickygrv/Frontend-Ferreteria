@@ -17,9 +17,23 @@ export class NuevoProductoComponent {
     precio: 0,
     stock: 0
   };
-  
+
+  // Verificar que todos los campos requeridos están completos y son válidos
+  formularioValido(): boolean {
+    return (
+      this.datos.nombre.trim() !== '' &&
+      this.datos.imagen.trim() !== '' &&
+      this.datos.precio > 0 &&
+      this.datos.stock > 0
+    );
+  }
 
   submitForm() {
+    if (!this.formularioValido()) {
+      alert('Por favor, completa todos los campos correctamente.');
+      return;
+    }
+
     const producto = {
       nombre: this.datos.nombre,
       imagen: this.datos.imagen,
@@ -59,5 +73,4 @@ export class NuevoProductoComponent {
       }
     );
   }
-
 }

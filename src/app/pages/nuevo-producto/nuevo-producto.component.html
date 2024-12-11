@@ -1,18 +1,16 @@
-<br>
-<br>
-<br>
-<br>
-<br>
+<br><br><br><br><br>
 <h1 style="text-align: center;">NUEVO PRODUCTO</h1>
 <form class="form" (ngSubmit)="submitForm()">
     <mat-form-field class="input">
-      <mat-label>Nombre</mat-label>
-      <input matInput placeholder="Nombre" [(ngModel)]="datos.nombre" name="nombre" required>
+        <mat-label>Nombre</mat-label>
+        <input matInput placeholder="Nombre" [(ngModel)]="datos.nombre" name="nombre" required>
+        <mat-error *ngIf="datos.nombre.trim() === ''">Este campo es obligatorio.</mat-error>
     </mat-form-field>
     <br>
     <mat-form-field class="input">
-      <mat-label>Imagen</mat-label>
-      <input matInput type="text" placeholder="Ingresa el link de la imagen para el producto" [(ngModel)]="datos.imagen" name="imagen" required>
+        <mat-label>Imagen</mat-label>
+        <input matInput type="text" placeholder="Ingresa el link de la imagen para el producto" [(ngModel)]="datos.imagen" name="imagen" required>
+        <mat-error *ngIf="datos.imagen.trim() === ''">Este campo es obligatorio.</mat-error>
     </mat-form-field>
     <br>
     <mat-form-field class="input">
@@ -27,16 +25,17 @@
                 <mat-form-field class="input2">
                     <mat-label>Precio</mat-label>
                     <input matInput type="number" placeholder="Precio" [(ngModel)]="datos.precio" name="precio" required>
+                    <mat-error *ngIf="datos.precio <= 0">El precio debe ser mayor a 0.</mat-error>
                 </mat-form-field>
             </td>
             <td>
                 <mat-form-field class="input2">
                     <mat-label>Cantidad en stock</mat-label>
                     <input matInput type="number" placeholder="Cantidad inicial en stock" [(ngModel)]="datos.stock" name="stock" required>
+                    <mat-error *ngIf="datos.stock <= 0">La cantidad debe ser mayor a 0.</mat-error>
                 </mat-form-field>
             </td>
         </tr>
     </table>
-    <button mat-raised-button color="primary" type="submit">Agregar producto</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!formularioValido()">Agregar producto</button>
 </form>
-  
