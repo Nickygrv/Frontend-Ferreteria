@@ -38,6 +38,10 @@ export class InventarioComponent {
   }
 
   applyPriceFilter(): void {
+    // Asegurarse de que los valores de minPrice y maxPrice no sean negativos
+    if (this.minPrice < 0) this.minPrice = 0;
+    if (this.maxPrice < 0) this.maxPrice = 0;
+
     // Restablecer el filtro de búsqueda y aplicar filtro de precios
     this.searchFilter = '';
     this.filterData();
