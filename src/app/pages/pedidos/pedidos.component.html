@@ -30,6 +30,9 @@
         min="1"
         required
       />
+      <mat-error *ngIf="pedido.cantidad <= 0">
+        La cantidad debe ser mayor a 0.
+      </mat-error>
     </mat-form-field>
 
     <!-- Botón para enviar el formulario -->

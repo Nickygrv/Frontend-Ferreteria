@@ -47,6 +47,12 @@ export class PedidosComponent implements OnInit {
       return;
     }
 
+    // Validar que la cantidad sea mayor a 0
+    if (this.pedido.cantidad <= 0) {
+      alert('La cantidad debe ser mayor a 0.');
+      return;
+    }
+
     // Buscar el producto seleccionado para validar su stock
     const productoSeleccionado = this.productos.find(
       (prod) => prod.id === +this.pedido.producto // Convertir a número antes de comparar
